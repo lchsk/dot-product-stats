@@ -9,6 +9,7 @@ def compute_dot_product(p_dataset, p_vectors, p_results):
     test_data = p_vectors[p_dataset.test]
 
     for lang in p_dataset.train:
+        product = 0
         for key, value in p_vectors[lang].items():
             factor = 0
             if main.ignore_when_not_found:
@@ -18,12 +19,11 @@ def compute_dot_product(p_dataset, p_vectors, p_results):
             product += value * test_data.get(key, factor)
 
         p_results[lang] = product
-        #print "Dot product for " + lang + ': ' + str(product)
 
-    # for lang in p_dataset.train:
-    #     for key, value in test_data.items():
-    #         product += value * vectors[lang].get(key, -1)
-    #     print "Dot product for " + lang + ': ' + str(product)
+def compute_difference(p_dataset, p_vectors, p_results):
 
-    # for key, value in test_data.items():
-    #     product += value * vectors[p_language].get(key, -1)
+    result = 0
+    test_data = p_vectors[p_dataset.test]
+
+    for lang in p_dataset.train:
+        p_results[lang] = reduce(operator.add, [abs(v - test_data.get(k, 0)) for k, v in p_vectors[lang].items()])
