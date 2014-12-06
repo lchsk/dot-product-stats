@@ -16,6 +16,10 @@ def print_results(p_results, p_reverse = True, p_decimal_numbers = 5):
 def get_files(p_directory):
     return [(p_directory, f) for f in listdir(p_directory) if isfile(join(p_directory, f)) and f.startswith(dataset.LETTER_FILENAME)]
 
+def get_all_files(p_directory):
+    return [(p_directory, f) for f in listdir(p_directory) if isfile(join(p_directory, f))]
+
+
 def read_files(p_filelist, p_language, p_vectors):
     for entry in p_filelist:
         try:
@@ -32,6 +36,10 @@ def read_files(p_filelist, p_language, p_vectors):
 def normalise(p_vectors):
     for lang, dat in p_vectors.items():
         # sum of all the values in a list
+
+        if len(dat) < 1:
+            continue
+
         values_sum = float(reduce(operator.add, [v for k, v in dat.items()]))
 
         # normalise

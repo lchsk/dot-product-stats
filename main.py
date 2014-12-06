@@ -10,17 +10,13 @@ import pearson
 #   if false, will multiply by -1
 ignore_when_not_found   = False
 decimal_numbers         = 3
-current                 = dataset.genesis_spaces
-
-vectors = {}
-results = {}
+current                 = dataset.genesis4
 
 class Method:
     DOT_PRODUCT = 0
     DIRICHLET   = 1
     DIFFERENCE  = 2
-    DIRICHLET2  = 3
-    PEARSON     = 4
+    PEARSON     = 3
 
 def run(p_method, p_normalise = True, p_reverse_results = True):
 
@@ -37,8 +33,6 @@ def run(p_method, p_normalise = True, p_reverse_results = True):
         dot.compute_dot_product(current, vectors, results)
     elif p_method == Method.DIRICHLET:
         bayes.calculate(current, vectors, results)
-    elif p_method == Method.DIRICHLET2:
-        bayes.cal(current, vectors, results)
     elif p_method == Method.DIFFERENCE:
         dot.compute_difference(current, vectors, results)
     elif p_method == Method.PEARSON:
@@ -50,9 +44,14 @@ def run(p_method, p_normalise = True, p_reverse_results = True):
 
 if __name__ == '__main__':
 
-    #run(Method.DIRICHLET)
+    vectors = {}
+    results = {}
+
+    #print '\n\nDirichlet\n'
+    #run(Method.DIRICHLET, p_normalise = False)
+    print '\n\nPearson\n'
     run(Method.PEARSON)
-    print
+    print '\n\nSum of Differences\n'
     run(Method.DIFFERENCE, p_reverse_results = False)
-    print
+    print '\n\nDot Product\n'
     run(Method.DOT_PRODUCT)

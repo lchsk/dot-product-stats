@@ -26,4 +26,8 @@ def compute_difference(p_dataset, p_vectors, p_results):
     test_data = p_vectors[p_dataset.test]
 
     for lang in p_dataset.train:
+
+        if len(p_vectors[lang]) < 1:
+            continue
+
         p_results[lang] = reduce(operator.add, [abs(v - test_data.get(k, 0)) for k, v in p_vectors[lang].items()])

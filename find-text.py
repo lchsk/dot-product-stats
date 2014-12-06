@@ -162,8 +162,8 @@ def similar(p_set1, p_set2):
 if __name__ == '__main__':
 
     test_stats = get_stats(test_data)
-    print test_stats
-    test_stats = normalise(test_stats)
+    #print test_stats
+    #test_stats = normalise(test_stats)
     #print test_stats
     #print get_stats(test_data_lc)
 
@@ -171,8 +171,11 @@ if __name__ == '__main__':
     # normalise(t)
 
     #print t
+
+    print sorted(test_stats.items())
     similar(test_stats, normalise(get_stats(check)))
-    print get_stats(check)
+    #print get_stats(check)
+    print sorted(get_stats(check).items())
 
     #open_file(swedish_text)
     #copy_to_single_file(german_dir, german_text)

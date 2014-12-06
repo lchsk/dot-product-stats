@@ -12,7 +12,10 @@ def stddev(p_d, p_mean):
 def pearson(p_d1, p_d2, p_mean1, p_mean2, p_stddev1, p_stddev2):
     tmp = reduce(operator.add, [(v - p_mean1) * (p_d2.get(k, 0) - p_mean2) for k, v in p_d1.items()])
 
-    return (tmp / len(p_d1)) / (p_stddev1 * p_stddev2)
+    if p_stddev1 * p_stddev2 != 0:
+        return (tmp / len(p_d1)) / (p_stddev1 * p_stddev2)
+    else:
+        return 0
 
 def compute(p_dataset, p_vectors, p_results):
 
@@ -22,6 +25,10 @@ def compute(p_dataset, p_vectors, p_results):
 
     for lang in p_dataset.train:
         l = p_vectors[lang]
+
+        if len(l) < 1:
+            continue
+
         m_l = mean(l)
         s_l = stddev(l, m_l)
 
